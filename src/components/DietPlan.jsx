@@ -21,16 +21,16 @@ export default function DietPlan({ profile, onBack }) {
 
   return (
     <main className="flex-grow w-full max-w-[1100px] mx-auto px-container-margin py-xl space-y-xl">
-      <button onClick={onBack} className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors text-body-sm">
+      <button onClick={onBack} className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors text-body-sm rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
         <Icon name="arrow_back" className="text-[18px]" /> Back to snapshot
       </button>
 
       {/* Header */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-md">
         <div>
-          <h1 className="text-headline-md font-semibold text-on-surface">{profile.name}'s cooking to-do for today</h1>
+          <h1 id="page-heading" tabIndex={-1} className="text-headline-md font-semibold text-on-surface focus:outline-none">{profile.name}'s cooking to-do for today</h1>
           <p className="text-body-lg text-on-surface-variant">
-            {completed}/{plan.chosen.length} meals done · {profile.diet === 'veg' ? 'Vegetarian' : 'Non-veg'} · Indian, everyday ingredients
+            <span role="status">{completed}/{plan.chosen.length} meals done</span> · {profile.diet === 'veg' ? 'Vegetarian' : 'Non-veg'} · Indian, everyday ingredients
           </p>
         </div>
         <div className="flex gap-sm">
@@ -45,6 +45,7 @@ export default function DietPlan({ profile, onBack }) {
 
       {/* Budget banner */}
       <div
+        role="status"
         className={`rounded-xl p-md flex items-center gap-md border ${
           budget.status === 'ok'
             ? 'bg-primary-container/10 border-primary-container/30 text-on-surface'
@@ -66,7 +67,9 @@ export default function DietPlan({ profile, onBack }) {
       </div>
 
       {/* Meal cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+      <section aria-labelledby="meals-heading">
+        <h2 id="meals-heading" className="sr-only">Today's meals</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
         {slots.map((slot) => {
           const m = plan.meals[slot]
           if (!m) return null
@@ -85,10 +88,11 @@ export default function DietPlan({ profile, onBack }) {
                 </span>
                 <button
                   onClick={() => toggle(m.id)}
-                  className={`w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all ${
+                  aria-pressed={checked}
+                  aria-label={`Mark ${m.name} as cooked`}
+                  className={`w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     checked ? 'bg-primary border-primary text-on-primary' : 'border-outline-variant text-transparent hover:border-primary'
                   }`}
-                  aria-label="mark cooked"
                 >
                   <Icon name="check" className="text-[18px]" />
                 </button>
@@ -129,6 +133,7 @@ export default function DietPlan({ profile, onBack }) {
             </div>
           )
         })}
+        </div>
       </section>
 
       {/* Nutrition totals */}
@@ -168,7 +173,7 @@ export default function DietPlan({ profile, onBack }) {
             <ul className="space-y-md">
               {substitutions.map((s) => (
                 <li key={s.match} className="text-body-sm">
-                  <div className="text-on-surface font-semibold capitalize">{s.match} → {s.to}</div>
+                  <div className="text-on-surface font-semibold">{s.label} → {s.to}</div>
                   <div className="text-on-surface-variant">{s.reason}</div>
                 </li>
               ))}
@@ -232,13 +237,22 @@ function Stat({ label, value, tone }) {
 
 function Bar({ label, have, target, unit, color }) {
   const pct = Math.min(100, Math.round((have / target) * 100))
+  const id = `bar-${label}`
   return (
     <div>
       <div className="flex justify-between text-body-sm mb-xs">
-        <span className="text-on-surface-variant">{label}</span>
+        <span className="text-on-surface-variant" id={id}>{label}</span>
         <span className="font-semibold text-on-surface">{Math.round(have)} / {target} {unit}</span>
       </div>
-      <div className="w-full bg-surface h-2 rounded-full overflow-hidden">
+      <div
+        className="w-full bg-surface h-2 rounded-full overflow-hidden"
+        role="progressbar"
+        aria-labelledby={id}
+        aria-valuenow={pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuetext={`${label}: ${Math.round(have)} of ${target} ${unit} (${pct}%)`}
+      >
         <div className={`${color} h-full rounded-full transition-all`} style={{ width: `${pct}%` }} />
       </div>
     </div>

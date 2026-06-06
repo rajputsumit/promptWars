@@ -3,14 +3,36 @@ import { ACTIVITY, GOALS } from '../lib/nutrition.js'
 import { Icon } from './Shell.jsx'
 
 const field =
-  'w-full bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary text-body-lg transition-all placeholder:text-outline-variant'
-const label = 'font-label-md text-label-md text-on-surface-variant px-sm uppercase'
+  'w-full bg-surface p-md rounded-xl border border-transparent focus:border-primary focus:ring-2 focus:ring-primary text-body-lg transition-all placeholder:text-outline'
+const labelCls = 'font-label-md text-label-md text-on-surface-variant px-sm uppercase'
+
+// Accessible pill toggle backed by a real radio input (keyboard + SR support).
+function PillRadio({ name, value, checked, onChange, children }) {
+  return (
+    <label
+      className={`p-md rounded-xl text-body-sm font-semibold text-center cursor-pointer transition-all block has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[:focus-visible]:ring-offset-2 ${
+        checked ? 'bg-primary text-on-primary soft-elevation' : 'bg-surface text-on-surface-variant hover:bg-surface-container'
+      }`}
+    >
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+        className="sr-only"
+      />
+      {children}
+    </label>
+  )
+}
 
 export default function Onboarding({ onSubmit }) {
   const [f, setF] = useState({
     name: '', heightCm: '', weightKg: '', age: '', sex: '',
     activity: 'moderate', goal: 'maintain', diet: 'veg', budget: 250,
   })
+  const [attempted, setAttempted] = useState(false)
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value })
 
   const ready =
@@ -19,7 +41,10 @@ export default function Onboarding({ onSubmit }) {
 
   function submit(e) {
     e.preventDefault()
-    if (!ready) return
+    if (!ready) {
+      setAttempted(true)
+      return
+    }
     onSubmit({
       name: f.name.trim() || 'there',
       heightCm: Number(f.heightCm),
@@ -35,7 +60,7 @@ export default function Onboarding({ onSubmit }) {
 
   return (
     <main className="flex-grow flex flex-col items-center px-container-margin py-xl">
-      <div className="w-full max-w-[520px] mb-xl flex gap-xs">
+      <div className="w-full max-w-[520px] mb-xl flex gap-xs" aria-hidden="true">
         <div className="h-1 flex-grow bg-primary rounded-full" />
         <div className="h-1 flex-grow bg-surface-variant rounded-full" />
         <div className="h-1 flex-grow bg-surface-variant rounded-full" />
@@ -43,38 +68,43 @@ export default function Onboarding({ onSubmit }) {
 
       <section className="w-full max-w-[520px] space-y-xl">
         <div>
-          <h1 className="text-display-lg-mobile font-bold text-on-surface mb-sm">Let's get started</h1>
+          <h1 id="page-heading" tabIndex={-1} className="text-display-lg-mobile font-bold text-on-surface mb-sm focus:outline-none">
+            Let's get started
+          </h1>
           <p className="text-body-lg text-on-surface-variant">
             Tell us about yourself so we can calculate your BMI and a balanced Indian diet for the day.
           </p>
         </div>
 
-        <form className="space-y-md" onSubmit={submit}>
+        <form className="space-y-md" onSubmit={submit} noValidate>
           <div className="flex flex-col gap-xs">
-            <label className={label}>Full name (optional)</label>
-            <input className={field} placeholder="e.g. Aarav Sharma" value={f.name} onChange={set('name')} />
+            <label htmlFor="name" className={labelCls}>Full name (optional)</label>
+            <input id="name" className={field} placeholder="e.g. Aarav Sharma" value={f.name} onChange={set('name')} />
           </div>
 
           <div className="grid grid-cols-2 gap-md">
             <div className="flex flex-col gap-xs">
-              <label className={label}>Height (cm)</label>
-              <input className={field} type="number" placeholder="172" value={f.heightCm} onChange={set('heightCm')} />
+              <label htmlFor="heightCm" className={labelCls}>Height (cm)</label>
+              <input id="heightCm" className={field} type="number" inputMode="numeric" min="50" max="250" required
+                placeholder="172" value={f.heightCm} onChange={set('heightCm')} />
             </div>
             <div className="flex flex-col gap-xs">
-              <label className={label}>Weight (kg)</label>
-              <input className={field} type="number" placeholder="68" value={f.weightKg} onChange={set('weightKg')} />
+              <label htmlFor="weightKg" className={labelCls}>Weight (kg)</label>
+              <input id="weightKg" className={field} type="number" inputMode="numeric" min="20" max="300" required
+                placeholder="68" value={f.weightKg} onChange={set('weightKg')} />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-md">
             <div className="flex flex-col gap-xs">
-              <label className={label}>Age</label>
-              <input className={field} type="number" placeholder="26" value={f.age} onChange={set('age')} />
+              <label htmlFor="age" className={labelCls}>Age</label>
+              <input id="age" className={field} type="number" inputMode="numeric" min="2" max="120" required
+                placeholder="26" value={f.age} onChange={set('age')} />
             </div>
             <div className="flex flex-col gap-xs">
-              <label className={label}>Sex</label>
+              <label htmlFor="sex" className={labelCls}>Sex</label>
               <div className="relative">
-                <select className={`${field} appearance-none bg-none cursor-pointer`} value={f.sex} onChange={set('sex')}>
+                <select id="sex" required className={`${field} appearance-none bg-none cursor-pointer`} value={f.sex} onChange={set('sex')}>
                   <option value="" disabled>Select</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
@@ -86,9 +116,9 @@ export default function Onboarding({ onSubmit }) {
           </div>
 
           <div className="flex flex-col gap-xs">
-            <label className={label}>Activity level</label>
+            <label htmlFor="activity" className={labelCls}>Activity level</label>
             <div className="relative">
-              <select className={`${field} appearance-none bg-none cursor-pointer`} value={f.activity} onChange={set('activity')}>
+              <select id="activity" className={`${field} appearance-none bg-none cursor-pointer`} value={f.activity} onChange={set('activity')}>
                 {Object.entries(ACTIVITY).map(([k, v]) => (
                   <option key={k} value={k}>{v.label}</option>
                 ))}
@@ -97,55 +127,49 @@ export default function Onboarding({ onSubmit }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-xs">
-            <label className={label}>Your goal</label>
+          <fieldset className="flex flex-col gap-xs border-0 p-0 m-0">
+            <legend className={`${labelCls} mb-xs`}>Your goal</legend>
             <div className="grid grid-cols-3 gap-sm">
               {Object.entries(GOALS).map(([k, v]) => (
-                <button
-                  type="button"
-                  key={k}
-                  onClick={() => setF({ ...f, goal: k })}
-                  className={`p-md rounded-xl text-body-sm font-semibold transition-all ${
-                    f.goal === k
-                      ? 'bg-primary text-on-primary soft-elevation'
-                      : 'bg-surface text-on-surface-variant hover:bg-surface-container'
-                  }`}
-                >
+                <PillRadio key={k} name="goal" value={k} checked={f.goal === k} onChange={() => setF({ ...f, goal: k })}>
                   {v.label}
-                </button>
+                </PillRadio>
               ))}
+            </div>
+          </fieldset>
+
+          <div className="grid grid-cols-2 gap-md">
+            <fieldset className="flex flex-col gap-xs border-0 p-0 m-0">
+              <legend className={`${labelCls} mb-xs`}>Diet</legend>
+              <div className="grid grid-cols-2 gap-sm">
+                {[['veg', 'Veg'], ['nonveg', 'Non-veg']].map(([k, lbl]) => (
+                  <PillRadio key={k} name="diet" value={k} checked={f.diet === k} onChange={() => setF({ ...f, diet: k })}>
+                    {lbl}
+                  </PillRadio>
+                ))}
+              </div>
+            </fieldset>
+            <div className="flex flex-col gap-xs">
+              <label htmlFor="budget" className={labelCls}>Food budget / day (₹)</label>
+              <input id="budget" className={field} type="number" inputMode="numeric" min="50" step="10"
+                placeholder="250" value={f.budget} onChange={set('budget')} />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-md">
-            <div className="flex flex-col gap-xs">
-              <label className={label}>Diet</label>
-              <div className="grid grid-cols-2 gap-sm">
-                {[['veg', 'Veg'], ['nonveg', 'Non-veg']].map(([k, lbl]) => (
-                  <button
-                    type="button"
-                    key={k}
-                    onClick={() => setF({ ...f, diet: k })}
-                    className={`p-md rounded-xl text-body-sm font-semibold transition-all ${
-                      f.diet === k ? 'bg-primary text-on-primary soft-elevation' : 'bg-surface text-on-surface-variant hover:bg-surface-container'
-                    }`}
-                  >
-                    {lbl}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col gap-xs">
-              <label className={label}>Food budget / day (₹)</label>
-              <input className={field} type="number" placeholder="250" value={f.budget} onChange={set('budget')} />
-            </div>
-          </div>
+          {attempted && !ready && (
+            <p role="alert" className="text-body-sm text-error flex items-center gap-xs">
+              <Icon name="error" className="text-[18px]" />
+              Please fill in your height, weight, age and sex with valid numbers.
+            </p>
+          )}
 
           <div className="pt-md">
             <button
               type="submit"
-              disabled={!ready}
-              className="w-full bg-primary text-on-primary text-title-lg py-md rounded-xl hover:opacity-90 active:scale-[0.98] transition-all soft-elevation flex items-center justify-center gap-sm disabled:opacity-40 disabled:cursor-not-allowed"
+              aria-disabled={!ready}
+              className={`w-full bg-primary text-on-primary text-title-lg py-md rounded-xl transition-all soft-elevation flex items-center justify-center gap-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                ready ? 'hover:opacity-90 active:scale-[0.98]' : 'opacity-40 cursor-not-allowed'
+              }`}
             >
               Calculate my plan
               <Icon name="arrow_forward" />

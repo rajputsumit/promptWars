@@ -21,12 +21,12 @@ export default function BmiResult({ profile, onContinue, onBack }) {
 
   return (
     <main className="flex-grow w-full max-w-[760px] mx-auto px-container-margin py-xl space-y-lg">
-      <button onClick={onBack} className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors text-body-sm">
+      <button onClick={onBack} className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors text-body-sm rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
         <Icon name="arrow_back" className="text-[18px]" /> Edit details
       </button>
 
       <div>
-        <h1 className="text-headline-md font-semibold text-on-surface">Hi {profile.name}, here's your snapshot</h1>
+        <h1 id="page-heading" tabIndex={-1} className="text-headline-md font-semibold text-on-surface focus:outline-none">Hi {profile.name}, here's your snapshot</h1>
         <p className="text-body-lg text-on-surface-variant">Based on your height, weight, age and activity.</p>
       </div>
 
@@ -45,8 +45,8 @@ export default function BmiResult({ profile, onContinue, onBack }) {
           </div>
         </div>
 
-        {/* BMI bar */}
-        <div className="relative h-3 rounded-full overflow-hidden flex">
+        {/* BMI bar (visual; value is conveyed in text above) */}
+        <div className="relative h-3 rounded-full overflow-hidden flex" aria-hidden="true">
           <div className="flex-grow bg-secondary-container/60" style={{ flexGrow: 3.5 }} />
           <div className="flex-grow bg-primary-container/70" style={{ flexGrow: 6.5 }} />
           <div className="flex-grow bg-tertiary-container/70" style={{ flexGrow: 5 }} />
@@ -58,7 +58,7 @@ export default function BmiResult({ profile, onContinue, onBack }) {
         >
           <div className="w-3 h-3 rounded-full bg-on-surface border-2 border-white shadow" />
         </div>
-        <div className="flex justify-between text-body-sm text-on-surface-variant">
+        <div className="flex justify-between text-body-sm text-on-surface-variant" aria-hidden="true">
           <span>15</span><span>18.5</span><span>25</span><span>30</span><span>35</span>
         </div>
       </section>
@@ -108,10 +108,18 @@ function MacroRow({ label, grams, kcal, total, color }) {
   return (
     <div>
       <div className="flex justify-between text-body-sm mb-xs">
-        <span className="text-on-surface-variant">{label}</span>
+        <span className="text-on-surface-variant" id={`macro-${label}`}>{label}</span>
         <span className="font-semibold text-on-surface">{grams} g · {pct}%</span>
       </div>
-      <div className="w-full bg-surface h-2 rounded-full overflow-hidden">
+      <div
+        className="w-full bg-surface h-2 rounded-full overflow-hidden"
+        role="progressbar"
+        aria-labelledby={`macro-${label}`}
+        aria-valuenow={pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuetext={`${label}: ${grams} grams, ${pct}% of daily calories`}
+      >
         <div className={`${color} h-full rounded-full`} style={{ width: `${pct}%` }} />
       </div>
     </div>
