@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Culina - Weekly Diet Plan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .airbnb-card-shadow { box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); }
+        .active-dot::after {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 4px;
+            background-color: #006e1c;
+            border-radius: 50%;
+            margin: 2px auto 0;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#78dc77",
+                      "secondary": "#b52330",
+                      "tertiary-container": "#f26f9d",
+                      "on-secondary-fixed-variant": "#92001b",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#becab9",
+                      "background": "#f5fbef",
+                      "tertiary": "#a63360",
+                      "primary-container": "#4caf50",
+                      "primary-fixed-dim": "#78dc77",
+                      "tertiary-fixed": "#ffd9e2",
+                      "on-background": "#171d16",
+                      "on-primary-fixed": "#002204",
+                      "surface-bright": "#f5fbef",
+                      "primary": "#006e1c",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#410007",
+                      "surface-container-high": "#e4eade",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "on-tertiary-container": "#690034",
+                      "surface-dim": "#d6dcd0",
+                      "surface-container-low": "#f0f6ea",
+                      "surface-variant": "#dee4d9",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#6f7a6b",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#edf3e7",
+                      "primary-fixed": "#94f990",
+                      "surface-container": "#eaf0e4",
+                      "on-surface-variant": "#3f4a3c",
+                      "tertiary-fixed-dim": "#ffb1c7",
+                      "surface-container-highest": "#dee4d9",
+                      "secondary-fixed": "#ffdad8",
+                      "on-tertiary-fixed": "#3e001c",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#60000e",
+                      "surface-tint": "#006e1c",
+                      "secondary-container": "#ff5a5f",
+                      "on-surface": "#171d16",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#861948",
+                      "on-primary-fixed-variant": "#005313",
+                      "inverse-surface": "#2c322a",
+                      "surface": "#f5fbef",
+                      "on-primary-container": "#003c0b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "xs": "4px",
+                      "container-margin": "24px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "title-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 bg-surface border-b border-surface-variant shadow-sm">
+<div class="max-w-[1200px] mx-auto px-container-margin h-16 flex items-center justify-between">
+<div class="flex items-center gap-md">
+<img alt="Culina Logo" class="h-10 w-10" src="data:image/png;base64,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"/>
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-primary tracking-tight">Culina</span>
+</div>
+<nav class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-lg text-body-lg" href="#">Explore</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="#">Planner</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-lg text-body-lg" href="#">Groceries</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined p-sm hover:bg-surface-container-low transition-all rounded-full cursor-pointer active:scale-95" data-icon="search">search</button>
+<button class="material-symbols-outlined p-sm hover:bg-surface-container-low transition-all rounded-full cursor-pointer active:scale-95" data-icon="account_circle">account_circle</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-container-margin pt-xl">
+<!-- Dashboard Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between mb-xl gap-md">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">Your Weekly Diet Plan</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Personalized meal schedule tailored to your health goals.</p>
+</div>
+<div class="flex gap-sm">
+<div class="bg-primary-container/10 px-md py-sm rounded-xl border border-primary-container/20">
+<span class="font-label-md text-label-md text-primary block">TOTAL BUDGET</span>
+<span class="font-title-lg text-title-lg text-on-primary-container">$142.50 / $150.00</span>
+</div>
+<div class="bg-secondary-container/10 px-md py-sm rounded-xl border border-secondary-container/20">
+<span class="font-label-md text-label-md text-secondary block">CALORIE TARGET</span>
+<span class="font-title-lg text-title-lg text-on-secondary-container">2,100 kcal</span>
+</div>
+</div>
+</section>
+<!-- Week Day Selector (Airbnb style scrolling pill list) -->
+<div class="flex gap-md overflow-x-auto hide-scrollbar pb-md mb-lg">
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-primary text-on-primary shadow-lg transition-transform active:scale-95">
+<span class="font-label-md text-label-md opacity-80">MON</span>
+<span class="font-title-lg text-title-lg">12</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">TUE</span>
+<span class="font-title-lg text-title-lg">13</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">WED</span>
+<span class="font-title-lg text-title-lg">14</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">THU</span>
+<span class="font-title-lg text-title-lg">15</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">FRI</span>
+<span class="font-title-lg text-title-lg">16</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">SAT</span>
+<span class="font-title-lg text-title-lg">17</span>
+</button>
+<button class="flex flex-col items-center min-w-[72px] p-md rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-primary transition-all active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant">SUN</span>
+<span class="font-title-lg text-title-lg">18</span>
+</button>
+</div>
+<!-- Meal Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xxl">
+<!-- Breakfast Card -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl airbnb-card-shadow overflow-hidden transition-all hover:-translate-y-1 cursor-pointer">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Breakfast" class="w-full h-full object-cover transform transition-transform group-hover:scale-105" data-alt="A top-down shot of a healthy breakfast bowl featuring poached eggs, creamy avocado slices, and vibrant smoked salmon on sourdough bread. The setting is a brightly lit, minimalist kitchen with natural sunlight streaming in, creating soft shadows. The aesthetic is warm and inviting, consistent with a premium lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgL0ji3mNTbGxT0M0vWLsl-BBx6YiQRT7k5FCljg9ANcrHVZGzgwL_Q8DLJ3Fdni432gSbgkmb2_MV64JBWcKPzEVucldJF_B5Lqi5nfqpdwMg8fdPH9gLNtTJdIfzz_I8CG4aLyJLWZG6wM01VMwHMMGZglAqNfZRTuPwjFoWM5CQAbSdLUYPv7FLPsz0Kbnqpznq-gTgmyNSzeXl40KML-l6DM3UCgXFCVC2F47JdV53__1j7CoyjBl9MvfqT3sAc8synx_8EVUG"/>
+<div class="absolute top-md left-md bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-full shadow-sm">
+<span class="font-label-md text-label-md text-primary">BREAKFAST</span>
+</div>
+<button class="absolute top-md right-md bg-white/80 backdrop-blur-sm p-sm rounded-full shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Avocado &amp; Poached Eggs</h3>
+<div class="flex items-center gap-xs text-on-surface-variant mb-md">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="font-body-sm text-body-sm">450 kcal</span>
+</div>
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-md">
+<span class="font-body-lg text-body-lg font-bold text-on-surface">$4.50</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+<span class="font-body-sm text-body-sm">15 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lunch Card -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl airbnb-card-shadow overflow-hidden transition-all hover:-translate-y-1 cursor-pointer">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Lunch" class="w-full h-full object-cover transform transition-transform group-hover:scale-105" data-alt="A vibrant Mediterranean quinoa salad bowl with fresh cucumbers, cherry tomatoes, kalamata olives, and crumbled feta cheese. The lighting is crisp and bright, highlighting the textures of the fresh ingredients. The photography style is modern and high-end, utilizing a clean white background with subtle wooden accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKKdavYLTbyNY67Bf886AOpxs0-q8PchbVyPEi1lgu1Iobtm1nZtV-vz5ovOiI7sCuBNUpxZk8LxMiqVRDEUo5xLKpK3ScQPOaDVCQ5ABt0yCJUTcNOvfcl4iQ6jCJ9o8S-Cw2i8kDwzG-RiW0swKtROFKc989c_UNF_MFoTwJtNuR7tT0za_2BQRnbDbFuzStuvz57bJH_axqeClQKnAGRAHJEt14lBvePfXJPvyLp9_zb2dKm1kdaFgKR3cHlVpnAWknEn5USTH5"/>
+<div class="absolute top-md left-md bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-full shadow-sm">
+<span class="font-label-md text-label-md text-primary">LUNCH</span>
+</div>
+<button class="absolute top-md right-md bg-white/80 backdrop-blur-sm p-sm rounded-full shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Mediterranean Quinoa Bowl</h3>
+<div class="flex items-center gap-xs text-on-surface-variant mb-md">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="font-body-sm text-body-sm">620 kcal</span>
+</div>
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-md">
+<span class="font-body-lg text-body-lg font-bold text-on-surface">$6.20</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+<span class="font-body-sm text-body-sm">20 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dinner Card -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl airbnb-card-shadow overflow-hidden transition-all hover:-translate-y-1 cursor-pointer">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Dinner" class="w-full h-full object-cover transform transition-transform group-hover:scale-105" data-alt="A perfectly seared salmon fillet with a golden-brown crust, served alongside roasted asparagus and lemon wedges on a minimalist ceramic plate. The mood is sophisticated and calming, with soft evening light creating a cozy dinner atmosphere. The focus is sharp on the food texture, maintaining a high-end culinary magazine aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn8v8wjM617083WEFSYe1MR7xxKEWT7oam5AVDau0lcwC6yKG1P7RA2KUtFHGh6PsdvNDCwikn0OcxuZ1CHPFQLNeU0fC8eYab_Deyti68r7aiJ5KBrCRUPNfTH-XUKLqADpwGWr-reV3FnS4tN-rWdc3ffrevyoOzBvb2NvFPjAEZl2LyUgkk7lD6YDm7oB-JlfCpb7zLlodv0O13ZSUTyXr_5F5boG16SsPgjUqb6Plr8wAqRzZ-zJ3gGhy0a_3zptoSLSZelUdU"/>
+<div class="absolute top-md left-md bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-full shadow-sm">
+<span class="font-label-md text-label-md text-primary">DINNER</span>
+</div>
+<button class="absolute top-md right-md bg-white/80 backdrop-blur-sm p-sm rounded-full shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Pan-Seared Salmon</h3>
+<div class="flex items-center gap-xs text-on-surface-variant mb-md">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="font-body-sm text-body-sm">780 kcal</span>
+</div>
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-md">
+<span class="font-body-lg text-body-lg font-bold text-on-surface">$12.80</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+<span class="font-body-sm text-body-sm">30 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Snack Card -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl airbnb-card-shadow overflow-hidden transition-all hover:-translate-y-1 cursor-pointer">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Snack" class="w-full h-full object-cover transform transition-transform group-hover:scale-105" data-alt="A simple, elegant arrangement of assorted nuts and fresh berries in a small artisanal ceramic bowl. The lighting is diffused and natural, highlighting the deep reds of the raspberries and the earthy tones of the walnuts. The composition is clean and minimalist, emphasizing health and tactile softness in a modern home environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYdSj-Y6TefpYNmjox01bxotSW37IHlCJsOnDoZPrStmjXkXQjst94_Hjrf2sz7Cj3HZOYILo-PJNlyoqq6IOKGbrwg1Vdi9EIQYi5SC1zScePyXRCV16Sj5DxwbS6TVZlhFi6FFHTqg5_dO7J3qpXRaNd1yl0wNZsV24AQ8t3s15HubEKQqGswie0Y4JRuFhz6Y0um-XOqNO_cmGJ9lnrLqd9UGG8MUr9YBl3KV__bhqpjs4Gl4HdUvRDoSP-4NCUtlGjN8yZMUR7"/>
+<div class="absolute top-md left-md bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-full shadow-sm">
+<span class="font-label-md text-label-md text-primary">SNACK</span>
+</div>
+<button class="absolute top-md right-md bg-white/80 backdrop-blur-sm p-sm rounded-full shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Berry &amp; Nut Mix</h3>
+<div class="flex items-center gap-xs text-on-surface-variant mb-md">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="font-body-sm text-body-sm">250 kcal</span>
+</div>
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-md">
+<span class="font-body-lg text-body-lg font-bold text-on-surface">$3.10</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+<span class="font-body-sm text-body-sm">5 min</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Nutrition Summary Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg mb-xxl">
+<!-- Weekly Insights -->
+<div class="lg:col-span-2 bg-surface-container-low p-xl rounded-xxl border border-surface-variant">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Nutrition Insights</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-lg">
+<div class="space-y-sm">
+<span class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider">Protein</span>
+<div class="w-full bg-surface h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[75%] rounded-full"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">120g / 160g</span>
+</div>
+<div class="space-y-sm">
+<span class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider">Carbs</span>
+<div class="w-full bg-surface h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[60%] rounded-full"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">180g / 300g</span>
+</div>
+<div class="space-y-sm">
+<span class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider">Fats</span>
+<div class="w-full bg-surface h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-[45%] rounded-full"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">45g / 100g</span>
+</div>
+</div>
+<div class="mt-xl p-md bg-surface-container-lowest rounded-xl flex items-center gap-md border border-outline-variant/30">
+<div class="bg-primary-container/20 p-sm rounded-full">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<strong>Smart Tip:</strong> You're doing great on proteins! Consider adding more leafy greens to your Lunch to hit your fiber goals for the day.
+                    </p>
+</div>
+</div>
+<!-- Budget Breakdown -->
+<div class="bg-surface-container-lowest p-xl rounded-xxl airbnb-card-shadow border border-surface-variant flex flex-col">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Budget Breakdown</h2>
+<div class="space-y-md">
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Est. Weekly Spend</span>
+<span class="font-body-lg text-body-lg font-bold text-on-surface">$142.50</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Left in Budget</span>
+<span class="font-body-lg text-body-lg font-bold text-primary">+$7.50</span>
+</div>
+<div class="w-full h-px bg-surface-variant my-sm"></div>
+<div class="space-y-sm">
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-on-surface-variant">Veggies &amp; Fruits</span>
+<span>$42.00</span>
+</div>
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-on-surface-variant">Proteins</span>
+<span>$68.50</span>
+</div>
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-on-surface-variant">Pantry Staples</span>
+<span>$32.00</span>
+</div>
+</div>
+</div>
+<button class="mt-auto w-full bg-primary text-on-primary py-md rounded-xl font-body-lg font-bold hover:bg-primary-container transition-colors active:scale-[0.98]">
+                    Generate Grocery List
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl mt-xxl bg-surface-container-lowest border-t border-surface-variant">
+<div class="max-w-[1200px] mx-auto px-container-margin flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="font-title-lg text-title-lg font-bold text-on-surface">Culina Health</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left">© 2024 Culina Health. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-opacity" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-opacity" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation Shell (Shown on small screens only) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-surface-variant px-lg py-sm z-50 flex justify-around items-center">
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-primary active-dot" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-[10px] font-bold">Planner</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="text-[10px] font-bold">Groceries</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</a>
+</div>
+<script>
+        // Micro-interaction for the day selector
+        const dayButtons = document.querySelectorAll('.flex.flex-col.items-center.min-w-\\[72px\\]');
+        dayButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                dayButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
+                    b.classList.add('bg-surface-container-lowest', 'border', 'border-surface-variant');
+                    b.querySelector('span:first-child').classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
+                btn.classList.remove('bg-surface-container-lowest', 'border', 'border-surface-variant');
+                btn.querySelector('span:first-child').classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

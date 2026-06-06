@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Culina | Your Health Snapshot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#78dc77",
+                    "secondary": "#b52330",
+                    "tertiary-container": "#f26f9d",
+                    "on-secondary-fixed-variant": "#92001b",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#becab9",
+                    "background": "#f5fbef",
+                    "tertiary": "#a63360",
+                    "primary-container": "#4caf50",
+                    "primary-fixed-dim": "#78dc77",
+                    "tertiary-fixed": "#ffd9e2",
+                    "on-background": "#171d16",
+                    "on-primary-fixed": "#002204",
+                    "surface-bright": "#f5fbef",
+                    "primary": "#006e1c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#410007",
+                    "surface-container-high": "#e4eade",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "on-tertiary-container": "#690034",
+                    "surface-dim": "#d6dcd0",
+                    "surface-container-low": "#f0f6ea",
+                    "surface-variant": "#dee4d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a6b",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#edf3e7",
+                    "primary-fixed": "#94f990",
+                    "surface-container": "#eaf0e4",
+                    "on-surface-variant": "#3f4a3c",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "surface-container-highest": "#dee4d9",
+                    "secondary-fixed": "#ffdad8",
+                    "on-tertiary-fixed": "#3e001c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#60000e",
+                    "surface-tint": "#006e1c",
+                    "secondary-container": "#ff5a5f",
+                    "on-surface": "#171d16",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861948",
+                    "on-primary-fixed-variant": "#005313",
+                    "inverse-surface": "#2c322a",
+                    "surface": "#f5fbef",
+                    "on-primary-container": "#003c0b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xxl": "48px",
+                    "xs": "4px",
+                    "container-margin": "24px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .bmi-gauge-clip {
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen">
+<!-- Header Navigation (Simplified for Transactional Flow) -->
+<nav class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-surface-variant dark:border-outline-variant shadow-sm dark:shadow-none">
+<div class="max-w-[1200px] mx-auto px-container-margin h-16 flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<img alt="Culina Logo" class="w-10 h-10 object-contain" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAOZElEQVR4AexcCZAU1Rn+/56dBTlUIsghRiMxmhJTEjVlygsTEXZndufgUFGCRonRWDEWRhSvFdF4oCGJ8SYRMSAgc+xO73KYQIyGJEo0SimpMmoC3hwCcuzOTP/53iy7TB8703Pscrhd/W+//3jv/e/r1+/4u2c16j5KQqAbwJLgI+oGsBvAEhEoMXt3D+wGsEQESsze3QMPFgBrGmr6g06siteeWR0JBXzR4BW+WGBadSxw5ehFo79SYjs7Lfs+64EjV47sWR0NTvBHA8/5I8GdkvJ8BnrbY2gvaSwxJnqKhe/VhJ/0enu+VRuvHdhpKJRQcJcCqEDzxwLjfJHgot6fH7YRlS8k4guJ6RDKefBAI83jcprsIyXa0Pk149Hs5Y8GbwZoH5LwYmYaz8S9C6qZmQuxl4sm++TiyWvl4h+8CbrUmlfJpE0/cVK1Ve+W71QAqxqrelRHAtdL0vMeHLqHifvhWvApJCnD0BrcZpSRIytIkyfRs08i5uGgeTJx8tVt+TNp5nnE1Konfljq6orCoqhMbY7kuvojgZ94mivf1ZgfgqNH5rJt1wl9CrDeBL0gRM+KyH0GyxQxPF9vHBv5b7udm4QwijAZPqKAk4mTFZCPmDTCbOILYMoOoJoxMTH8k5gfJuIhlPOQ9STymBiGf1PS2ysRjg3UQ/FvgUbpodgkPRy/qTEYf6pQ8HjVqhSqvQFkPRVwisxy5pu5rs4wC91xZQXQFwkNr6g45F9EPII6PGS7kHEXvB2RCMW/mgjHr9bH1uurJyze1WGWIhS8YO4CZLsGlO+8huc//Vw+o470ZQMQk8T3mWQ1Mw11qkxImoXoQfGmjtFD9bc3hmKvO9mVU8bz5z6K8nKBCPAyNjAr7iwLgFjPXUZCy4mpj80NIQOP6TNJpuP1UOwG3a9vsdl0pkAEnZ22O1SxHX4pnYPKvahkABV4KOT3AA8Xc8VCssXwGOfhMZ28PBhfb9Z2PqcmDWJ+DDX1BVnPvkqXsbFqCuBtjS4gL1UtqTlDE3rKMY/IOsyeIxoD9S866jtZiDXexajCPmFAaDkxO192kUXmmi0awOol4WM0TWskJg/ZDmls6b3rtEJnT1sxRQoy60CWBx2yq/FQkUVl3NOl60AskA/VtPQydlgYi8jjiVDct3z08h0WL7uWta8DMxOG48TSpetAIfbs7lFPxCeQ5RChFXoorhaqFk3XsnvWgT9FrckMiUzZAxxYokwaMiJq1bMxtcvWgb5Y8Fo8tueictMJ8N7WvOkgdGJSFMCMideegPDVVVgSzQatxIL8s1YKIh2crXQIdX3DTZFYBy4BUJUZWvCMbZxmyDK6+XNhMy/ipkwnm4LGQBUUwHKlzlqQYLZlb2pUQ03DTqvODT9+0fhKXyRwt8fgtZpkZs3rkG8kEfdvJUKarlM6rDXX+qK1M0599VQv7QdHQQAaSW0aM5mCm+h5ScMwqhM1iQ+KaQ+WQafsqkiuZebpGFMr8pXBTF4m7bbB/xv6mi8aPJX28eEaQEwcA/B4TrX6K0y/bBrb8Der3A0PAG5Dj8K+mY7Pbe+gZT6JSF5Bz73dQdtlItcAas2Vdeghphgeet9W6dF8dzHeArzfMNEMJvSprAIwi7+M7cGFWaLWJMtFGFzXtDKtf1VeZr4TID7UKun6v64AVGs+Fr7K6h4zzWqqbtpmlefjMUHgZtC1Zjv50NCMcxGBOQv75EVmHVEiGF+oh2KnGWJcgJ73Sbaema9Hmbdmy7oq7QpA5vTVxOYFM3rfZq5IF3znfUtqfUR0B6j9xCT0gnhTw93sWhrD9Su4whiOzKtA2eddABHgZos6P+0KQGIebXWFNZlTzKzLGt9lKkvkjc3JytpCggyodyNung83ca25LJpp4ruAyQsgli79megUshwYj2IWUX5WiIWofR2HnrclxRwoJhYIEHeSkQygjPYhJFO2ENzN70q5LPICaKQ8Yxwq26QH4391kOcWMQneVUxEo7HNk/WYwauWhmLv587UsVYfp7/Loo1BT9xAQl/gqZgI+KTjHOXX5AUQVdoeX8TRil6564H6ej0U75NANBrh+r+j/JLORDi6Wg/Hjk6EY30x0TSWVFgRmfMCyCL28LxGMeo+MgjkBZCYj8pYZv1JV7a8ksV+qZM5AcQe1QN0Dge1nxi/Ulj7fdYu+JIncgK4rUfz16z4YIrr8tC81Yf9ic8JILqf7b0uprgN+1MDyu2Leq+NsNmVilQ6X/k5ASRDs41/ROwOQDrwjmq9epD6EgxhsycVqXS+r8JyAqiJ4fSO98MDDxp3HmstleOIOOszuvxfheUEUDIbBzIfCJeYBQcPJ0THkuUQ5p4WkYnNCSCWMB+brBXDPEhdDkoSsbWNxbBjkNX4nACKGKawUSafUFYXz0gOmj8Ii9kAJNaKB5A0tmXGdvagBRBbVBuA7EnbMMjuMTl7YMrQ7D2Q2FZJdoEHdNpheNqZqigewOXhqPrgEWNrFixMR2bej2SJDoakCtuhHUeA2k+16/pjOLqpXeCQyNkDlT12HrbP0LTdPYv+pliVuT8SwnYBB79sbbfa5AWQiJeS7TCcYoQ2qwNKIGQP25E05WtDXgDxoscGIDMXDaA/FqjxRYLvg9b7I6Hv5nMwn74qXnsm3sptwFu+96ojIX8++xx6+/sUZlvbrfnzAthYW/8SxgJEkE1ZD69ZUnO6SeKCUV8TIHq8gJmOAQ0VNpb6nvcd5yKro0lVNDhMM7iRmY/CUHOsRrKAhJB0NO9QqG4kMx2WbQA/t+ouou55AYQ7Bgkvyy5cpQ3NMdSvVB3SmtPWJPFS5D9tBkx8KHkqYhjAe7XJ3F5HLhrfx0OiZ8rYk0lY1sFf2cO6v7DYH18mW5udCjQB6GSgZEyGrSszyY8RL6xU+kIId2Natj0AOFmSnlWjl4QHZ8tzpauWhIf29ibxWpNNX4iJyPRc+Zx0qg3obT+y6ljE1marjeJdAZjumVyISraqDHuJh+ysaPn5Xt5dCu91l6KhM0zWTKd7tfRreK+rPiIyqayMLxY438PGGiayfhdzG8peYbXPx+/yJm/G4zs42w5t3cxeY2G2rKO0KwARgd6GSu6zFgLZdDx+/a3yfLwejt+BVf+vyXSw2uGs9EUDL/oiteNNKjDV0eAEfySwmoVX4DE1/XAHN2RWIhSbCbOCThW+IpIbrZmYjHsbXH5p5gpAVUG6R7P6CmGTSu8l7iVJ7f69vPtUIhxXn7DVkZCRnYuJz2bWbJ92wNGFxHxGtu2evHfihhT8JKhytBYvfGfL+Cuf4Imz3Fxl7Uzwy1lhlaIXqt952O6yMF2GpUlRC2v0mjsNTU4Rklet9eXjhegfaU1ORhl1+Wyd9FjyYOHMk6w6tGeGaqtV3hHvGkBVwMdHr/8tHhfT3hA9Bj2eF6qvS5VNoYR3w2/qwfh3AMg1QtL+lUFH5WB82qps9WDsjKZg/K2O7HLJa+prTsoseSxGKHuDHoirn0VYNB2zBQGoliGiUR1ZD6Y+HkPTsUc+1KpyxTPWI6HYozsO3zqQhM8mMW5EYyKgj3DDPsA1AtBuUDqjZ/NAHbaEPK7Kthj5Er5+ktaakN/hN8p8K+SmIcWS3cYWBKDK3RiIP4FGrVTpbGKiYVpz5RISuJCtKCC96rxVuxPh6EuJcP0Dejg2FjRED8eH6iodij2odIU8Xraq4Ru3eNUH8kdbdUKyTA9H51rl+fiCAQQ8YvRsCZLIOmvhTHw+ZlH1+zSrar/g/dHA4/D/LKsz6OFrdyTV+xCrJj9fOIAoE71gW4q5CndtC1jTycxXwVH9gmUX9DYp9iGjfMGNxfKHp1jdUG0wRKtaNWHxF1adG74oAFXBma+qmPx4ZNOKNxNXV+445FW1YzDLu55TX9cqX9TTYa1dhJLokf6msZGiX9UWDaByRsdmG9O+7dNfpSPmEz2a8braqGf4ffCnOl57DmOHo3xxqp7JuFy1wUnnVlYSgKoSzIhzMG1d7twT6Qis9P+CHcQT+V5Qq7LKRahrCMJbc7S09if0vH7WcvHYppTPiXD9H6y6QvmSAVQVNoZiTxse43twzDYmEpOHmKcYBr/riwRmonF9qZMOtYxCHfcaae0dJvohMeom86F8ZNHOUT6bNcVxZQFQVa0+EBfDMwI97h3F24l7YYK5xQCQCBpcp2KDdpviJCqigh43Vdvd4z3UMQ3AOazxUDZWDgIfE+HoanBlOcsGoPJG/bxV0+TbuMsvKN6ZWAUfZg9aP3QjeksToivTQWej9/RwtrdLla0a35D/FsyuS3d5Wzaix81iJtOvqMw5O+cnuGUFUDlcH6jfrofio7BOnIxZ7iMlcyJGMJWZxyC6cjfoRU9zj93+SPATAPIGwv3L0aPmYez8Ba6zANSzrbKA0n2qbDVD+zPyz0Q5CIZyh8MCfNggRJMSnfQT3LID2AYWoi3P7Oj3+XGIEt+ERlhiieR8MB0JQE5mplFMdCkx34TrVGa+hDMyVroBzplt0s8JW8JeKe8wPRR71qYtk6DTAFT+qa0Zlgn37SYeBv5XADKJa+eeQi3ocbPFmzwOs+wDiycsbunMCjsVwDbH1cvpRCj2s1Rq1yA07krImwgNxbUsJ8bcZuzPdRHjimRq12D0uOt1f9f8d5AuAbANpWUTlm1G4+YAzOp0z+YBxHIJemUEM3fBvzMGaDtI5Hms5yZiH9tfD8f9erj+d6qOtvq64tqlAGY3SO2nE8H4fB2RlkQo3psr0gNA30xrxlmGcFD1VDV+Is80lVYypUtpxomwG6Cr35qE4+OxnltQ7D4WZZd87jMArZ431DRsBK1rCtS/3BiOxvVQbI4aPxOh2P0qrWRKtzRQ/+8G2Frz7yt+vwFwXwFQar3dAJaI4IEIYIlNLm/2bgBLxLMbwG4AS0SgxOz/BwAA//8VlUwCAAAABklEQVQDAOTBb+w0y5hNAAAAAElFTkSuQmCC"/>
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Culina</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+<main class="max-w-[1200px] mx-auto px-container-margin py-xl">
+<!-- Header Section -->
+<header class="mb-xxl animate-fade-in">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background mb-sm">Your Culinary Blueprint</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">We've analyzed your onboarding data to create a personalized nutritional framework designed for your lifestyle and goals.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-start">
+<!-- BMI Status Card (Large) -->
+<section class="md:col-span-7 bg-surface-container-lowest rounded-xl p-xl shadow-sm border border-surface-variant flex flex-col items-center justify-center relative overflow-hidden animate-fade-in" style="animation-delay: 0.1s;">
+<div class="absolute top-0 right-0 p-lg opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="health_metrics">health_metrics</span>
+</div>
+<h2 class="font-title-lg text-title-lg mb-xl w-full text-left">Current Health Index</h2>
+<!-- BMI Gauge -->
+<div class="relative w-64 h-32 mb-lg">
+<div class="absolute inset-0 rounded-t-full border-[16px] border-surface-container-high"></div>
+<!-- Dynamic Progress (assuming 22.5 is roughly 45% of range 15-35) -->
+<div class="absolute inset-0 rounded-t-full border-[16px] border-primary-container" style="clip-path: inset(0 55% 0 0);"></div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 text-center pb-2">
+<span class="font-display-lg text-display-lg-mobile text-on-surface block">22.5</span>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary font-bold">Healthy Range</span>
+</div>
+</div>
+<div class="w-full grid grid-cols-3 gap-md mt-xl pt-xl border-t border-surface-variant">
+<div class="text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Weight Status</p>
+<p class="font-title-lg text-title-lg text-on-surface">Normal</p>
+</div>
+<div class="text-center border-x border-surface-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Daily Target</p>
+<p class="font-title-lg text-title-lg text-on-surface">2,150 <span class="text-body-sm font-normal">kcal</span></p>
+</div>
+<div class="text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Metabolic Type</p>
+<p class="font-title-lg text-title-lg text-on-surface">Balanced</p>
+</div>
+</div>
+</section>
+<!-- Weekly Budget Card (Sidebar) -->
+<section class="md:col-span-5 bg-primary-container text-on-primary-container rounded-xl p-xl shadow-md animate-fade-in" style="animation-delay: 0.2s;">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 bg-on-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<h2 class="font-title-lg text-title-lg">Grocery Budget</h2>
+</div>
+<p class="font-body-lg mb-xl opacity-90">What is your preferred weekly investment for ingredients? This helps us optimize your meal plans.</p>
+<div class="space-y-md">
+<div class="relative group">
+<span class="absolute left-md top-1/2 -translate-y-1/2 text-on-primary-container/60 font-bold">$</span>
+<input class="w-full bg-on-primary-container/10 border-none rounded-lg py-md pl-xl pr-md text-on-primary-container placeholder:text-on-primary-container/40 focus:ring-2 focus:ring-on-primary transition-all font-bold text-title-lg" placeholder="0.00" type="number"/>
+</div>
+<p class="font-body-sm text-body-sm opacity-70 italic text-center">Suggested for your profile: $80 - $120</p>
+</div>
+</section>
+<!-- Macro Goals Section -->
+<section class="md:col-span-12 mt-lg animate-fade-in" style="animation-delay: 0.3s;">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md text-headline-md">Daily Macro Targets</h2>
+<div class="flex items-center gap-sm px-md py-xs bg-surface-container rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Recommended Distribution</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Protein Card -->
+<div class="bg-surface-container-low p-xl rounded-xl border border-surface-variant hover:border-primary transition-all group">
+<div class="flex justify-between items-start mb-xl">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Protein</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Muscle Recovery</p>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="fitness_center">fitness_center</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-on-surface">165</span>
+<span class="font-body-lg text-on-surface-variant">grams</span>
+</div>
+<div class="mt-lg w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%]"></div>
+</div>
+<p class="mt-md font-label-md text-label-md text-on-surface-variant">30% of total calories</p>
+</div>
+<!-- Carbs Card -->
+<div class="bg-surface-container-low p-xl rounded-xl border border-surface-variant hover:border-secondary-container transition-all group">
+<div class="flex justify-between items-start mb-xl">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Carbohydrates</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Energy Source</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container group-hover:scale-110 transition-transform" data-icon="bolt">bolt</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-on-surface">242</span>
+<span class="font-body-lg text-on-surface-variant">grams</span>
+</div>
+<div class="mt-lg w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[45%]"></div>
+</div>
+<p class="mt-md font-label-md text-label-md text-on-surface-variant">45% of total calories</p>
+</div>
+<!-- Fats Card -->
+<div class="bg-surface-container-low p-xl rounded-xl border border-surface-variant hover:border-tertiary-container transition-all group">
+<div class="flex justify-between items-start mb-xl">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Fats</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hormone Health</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-container group-hover:scale-110 transition-transform" data-icon="opacity">opacity</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg-mobile text-display-lg-mobile font-bold text-on-surface">60</span>
+<span class="font-body-lg text-on-surface-variant">grams</span>
+</div>
+<div class="mt-lg w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[25%]"></div>
+</div>
+<p class="mt-md font-label-md text-label-md text-on-surface-variant">25% of total calories</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Call to Action -->
+<div class="mt-xxl flex flex-col md:flex-row items-center justify-between bg-surface-container p-lg rounded-xl gap-lg animate-fade-in" style="animation-delay: 0.4s;">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<h4 class="font-title-lg text-title-lg">Ready to cook?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">We've generated 14 meal options matching these macros.</p>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary px-xl py-md rounded-full font-bold hover:opacity-90 active:scale-95 transition-all shadow-md">
+                Generate My Planner
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-surface-variant w-full py-xl mt-xxl">
+<div class="max-w-[1200px] mx-auto px-container-margin flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="font-title-lg text-title-lg font-bold text-on-surface">Culina</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-80">© 2024 Culina Health. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80 hover:underline decoration-primary underline-offset-4" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80 hover:underline decoration-primary underline-offset-4" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80 hover:underline decoration-primary underline-offset-4" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for the budget input
+        const budgetInput = document.querySelector('input[type="number"]');
+        if (budgetInput) {
+            budgetInput.addEventListener('focus', () => {
+                budgetInput.closest('section').classList.add('scale-[1.02]');
+                budgetInput.closest('section').style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+            budgetInput.addEventListener('blur', () => {
+                budgetInput.closest('section').classList.remove('scale-[1.02]');
+            });
+        }
+
+        // Simple parallax on scroll for background effects
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            const heroIcon = document.querySelector('.material-symbols-outlined[data-icon="health_metrics"]');
+            if (heroIcon) {
+                heroIcon.style.transform = `translateY(${scroll * 0.1}px) rotate(${scroll * 0.05}deg)`;
+            }
+        });
+    </script>
+</body></html>

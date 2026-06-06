@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Culina - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#78dc77",
+                    "secondary": "#b52330",
+                    "tertiary-container": "#f26f9d",
+                    "on-secondary-fixed-variant": "#92001b",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#becab9",
+                    "background": "#f5fbef",
+                    "tertiary": "#a63360",
+                    "primary-container": "#4caf50",
+                    "primary-fixed-dim": "#78dc77",
+                    "tertiary-fixed": "#ffd9e2",
+                    "on-background": "#171d16",
+                    "on-primary-fixed": "#002204",
+                    "surface-bright": "#f5fbef",
+                    "primary": "#006e1c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#410007",
+                    "surface-container-high": "#e4eade",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "on-tertiary-container": "#690034",
+                    "surface-container-low": "#f0f6ea",
+                    "surface-variant": "#dee4d9",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a6b",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#edf3e7",
+                    "primary-fixed": "#94f990",
+                    "surface-container": "#eaf0e4",
+                    "on-surface-variant": "#3f4a3c",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "surface-container-highest": "#dee4d9",
+                    "secondary-fixed": "#ffdad8",
+                    "on-tertiary-fixed": "#3e001c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#60000e",
+                    "surface-tint": "#006e1c",
+                    "secondary-container": "#ff5a5f",
+                    "on-surface": "#171d16",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861948",
+                    "on-primary-fixed-variant": "#005313",
+                    "inverse-surface": "#2c322a",
+                    "surface": "#f5fbef",
+                    "on-primary-container": "#003c0b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xxl": "48px",
+                    "xs": "4px",
+                    "container-margin": "24px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #171d16;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .input-focus-effect:focus-within {
+            box-shadow: 0 0 0 2px #006e1c;
+        }
+        .soft-elevation {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Header / Logo Area (Navigation Shell suppressed for Onboarding) -->
+<header class="w-full h-20 flex items-center justify-center pt-xl">
+<img alt="Culina Logo" class="h-10 w-10" src="data:image/png;base64,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"/>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin py-xxl">
+<!-- Onboarding Progress (Subtle indicator) -->
+<div class="w-full max-w-[480px] mb-xl flex gap-xs">
+<div class="h-1 flex-grow bg-primary rounded-full"></div>
+<div class="h-1 flex-grow bg-surface-variant rounded-full"></div>
+<div class="h-1 flex-grow bg-surface-variant rounded-full"></div>
+</div>
+<section class="w-full max-w-[480px] space-y-xl">
+<div class="text-center md:text-left">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-sm">Let's get started</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tell us a bit about yourself so we can personalize your culinary journey.</p>
+</div>
+<form class="space-y-md" id="onboardingForm">
+<!-- Name Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant px-sm">FULL NAME</label>
+<input class="w-full bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg transition-all placeholder:text-outline-variant" placeholder="e.g. Alex Rivera" type="text"/>
+</div>
+<!-- Bio Metrics Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant px-sm">HEIGHT (CM)</label>
+<input class="w-full bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg transition-all placeholder:text-outline-variant" placeholder="175" type="number"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant px-sm">WEIGHT (KG)</label>
+<input class="w-full bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg transition-all placeholder:text-outline-variant" placeholder="70" type="number"/>
+</div>
+</div>
+<!-- Age & Sex Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant px-sm">AGE</label>
+<input class="w-full bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg transition-all placeholder:text-outline-variant" placeholder="28" type="number"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant px-sm">SEX</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface p-md rounded-xl border-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg transition-all text-on-surface cursor-pointer">
+<option disabled="" selected="" value="">Select</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+<option value="other">Other</option>
+<option value="prefer_not_to_say">Prefer not to say</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="pt-lg">
+<button class="w-full bg-primary text-on-primary font-title-lg text-title-lg py-md rounded-xl hover:opacity-90 active:scale-[0.98] transition-all soft-elevation flex items-center justify-center gap-sm" type="submit">
+                        Next
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+</main>
+<!-- Footer (Using Predicted Component Guidelines) -->
+<footer class="w-full py-xl mt-xxl bg-surface-container-lowest border-t border-surface-variant">
+<div class="max-w-[1200px] mx-auto px-container-margin flex flex-col md:flex-row justify-between items-center gap-md">
+<span class="font-title-lg text-title-lg font-bold text-on-surface">Culina</span>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Contact Support</a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Culina Health. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Subtle transition effect on submit
+            this.style.opacity = '0.5';
+            this.style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                alert('Success! Moving to the next step of your health journey.');
+                this.style.opacity = '1';
+                this.style.transform = 'translateY(0)';
+            }, 500);
+        });
+
+        // Add micro-interaction for input fields
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+                input.parentElement.classList.add('transition-transform');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>
